@@ -1,0 +1,47 @@
+---
+title: "Data_structures"
+output: html_document
+---
+
+```{r}
+cat_file <- "https://raw.githubusercontent.com/COMBINE-Australia/RNAseq-R/gh-pages/data/feline-data.csv"
+download.file(cat_file, destfile="feline-data.csv")
+cats <- read.csv("feline-data.csv")
+cats
+```
+```{r}
+?download.file
+?read.csv
+getwd()
+```
+
+```{r}
+cats$weight
+```
+```{r}
+my_sum <- function(a,b){
+  sum1 <- a + b
+  return(sum1)
+}
+my_sum(7,8)
+
+fahr_kelvin <- function(temp){
+        kelv <- (temp-32)*(5/9)+273.15
+        return(kelv)
+}
+
+kelvin_celsius <- function(kelvin_temp){
+        celsius <- (kelvin_temp-273.15)
+        return(celsius)
+}
+
+fahr_celsius <- function(fahr){
+  stopifnot(is.numeric(fahr))
+  temperature1 <- fahr_kelvin(fahr)
+  temperature2 <- kelvin_celsius(temperature1)
+  return(temperature2)
+}
+fahr_celsius(65)
+fahr_celsius("hello world")
+```
+

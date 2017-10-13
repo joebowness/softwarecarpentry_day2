@@ -1,0 +1,17 @@
+---
+title: "Day2_2"
+output: html_document
+---
+
+```{r}
+mass <- 47.5*2
+age <- 122-20
+mass > age
+rm(mass,age,myVector,x)
+```
+```{r}
+install.packages("ggplot2")
+install.packages("plyr")
+install.packages("gapminder")
+```
+

@@ -1,0 +1,30 @@
+---
+title: "plotting"
+output: html_document
+---
+```{r}
+gapminder_file <- "https://raw.githubusercontent.com/COMBINE-Australia/RNAseq-R/gh-pages/data/gapminder-FiveYearData.csv"
+download.file(gapminder_file, destfile="gapminder-FiveYearData.csv")
+gapminder <- read.csv("gapminder-FiveYearData.csv")
+library(ggplot2)
+head(gapminder)
+?ggplot
+ggplot(data = gapminder, aes(x = continent, y = lifeExp, by=country)) +
+  geom_point(aes(color=continent))
+ggplot(data = gapminder, aes(x = gdpPercap, y = lifeExp, color=continent)) +
+  geom_point(aes(alpha=continent), size=0.5, shape=12) + scale_x_log10() + geom_smooth(method="lm", size=0.5)
+
+#Plot Life Expectancy for each country over time
+starts.with <- substr(gapminder$country, start = 1, stop = 1)
+az.countries <- gapminder[starts.with %in% c("A", "B"), ]
+ggplot(data = az.countries, aes(x = year, y = lifeExp, color=continent)) +
+  geom_line() + facet_wrap( ~ country) +
+  labs(
+    x="Year", y="Life Expectancy", title="Figure 1", color="Continent"
+  )
+
+#Density plots over time of life expectancies in different countries
+ggplot(data=gapminder, aes(x = gdpPercap, fill=continent)) + scale_x_log10() + geom_density(alpha=0.6) + facet_wrap( ~ year) + theme_minimal() 
+
+
+```

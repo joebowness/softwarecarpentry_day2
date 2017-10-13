@@ -1,0 +1,45 @@
+---
+title: "functions"
+output: html_document
+---
+#Sum something
+my_sum <- function(a,b){
+  sum1 <- a + b
+  return(sum1)
+}
+#Fahrenheit -> Kelvin
+fahr_kelvin <- function(temp){
+        kelv <- (temp-32)*(5/9)+273.15
+        return(kelv)
+}
+#Celsius -> Fahrenheit
+kelvin_celsius <- function(kelvin_temp){
+        celsius <- (kelvin_temp-273.15)
+        return(celsius)
+}
+#Fahrenheit -> Celsius
+fahr_celsius <- function(fahr){
+  stopifnot(is.numeric(fahr))
+  temperature1 <- fahr_kelvin(fahr)
+  temperature2 <- kelvin_celsius(temperature1)
+  return(temperature2)
+}
+#Calculate GDP - mutliples population column by GDP per capita
+calcGDP <- function(dat, year=NULL, country=NULL) {
+  if(!is.null(year)) {
+    dat <- dat[dat$year %in% year, ]
+  }
+  if (!is.null(country)) {
+    dat <- dat[dat$country %in% country,]
+  }
+  gdp <- dat$pop * dat$gdpPercap
+  
+  new <- cbind(dat, gdp=gdp)
+  return(new)
+}
+#Fence function
+fence <- function(text, wrapper){
+  text <- c(wrapper,text,wrapper)
+  result <- paste(text, collapse= " ")
+  return(result)
+}
